@@ -2,6 +2,7 @@
 
 const input = require("readline-sync");
 let word = "";
+
 const oldPointStructure = {
   1: ["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"],
   2: ["D", "G"],
@@ -12,37 +13,46 @@ const oldPointStructure = {
   10: ["Q", "Z"],
 };
 
-let newPointStructure = {
-  a: 1,
-  b: 3,
-  c: 3,
-  d: 2,
-  e: 1,
-  f: 4,
-  g: 2,
-  h: 4,
-  i: 1,
-  j: 8,
-  k: 5,
-  l: 1,
-  m: 3,
-  n: 1,
-  o: 1,
-  p: 3,
-  q: 10,
-  r: 1,
-  s: 1,
-  t: 1,
-  u: 1,
-  v: 4,
-  w: 4,
-  x: 8,
-  y: 4,
-  z: 10,
-};
+let newPointStructure = {};
+
+//newPointStructure = transform(oldPointStructure);
+
+// let newPointStructure = {
+//   a: 1,
+//   b: 3,
+//   c: 3,
+//   d: 2,
+//   e: 1,
+//   f: 4,
+//   g: 2,
+//   h: 4,
+//   i: 1,
+//   j: 8,
+//   k: 5,
+//   l: 1,
+//   m: 3,
+//   n: 1,
+//   o: 1,
+//   p: 3,
+//   q: 10,
+//   r: 1,
+//   s: 1,
+//   t: 1,
+//   u: 1,
+//   v: 4,
+//   w: 4,
+//   x: 8,
+//   y: 4,
+//   z: 10,
+// };
+
+
+
+
+
 
 function oldScrabbleScorer(word) {
-  word = word.toUpperCase();
+//   word = word.toUpperCase();
   let letterPoints = "";
 
   for (let i = 0; i < word.length; i++) {
@@ -89,25 +99,46 @@ let scrabbleScorer = function (word) {
   return totalPoints;
 };
 
-function transform(oldPointStructure) {
-  let transformedPointStructure = {};
 
-  for (const [points, letters] of Object.entries(oldPointStructure)) {
-    for (const letter of letters) {
-      newPointStructure[letter.toLowerCase()] = parseInt(points);
-    }
-  }
+// function transform(oldPointStructure) {
+//   let transformedPointStructure = {};
 
-  return transformedPointStructure;
+//   for (const [points, letters] of Object.entries(oldPointStructure)) {
+//     for (const letter of letters) {
+//       newPointStructure[letter.toLowerCase()] = parseInt(points);
+//     }
+//   }
+
+//   return transformedPointStructure;
+// }
+
+// newPointStructure = transform(oldPointStructure);
+
+// console.log(newPointStructure);
+
+
+ function transform(oldPointStructure) {
+   
+   for (let [points, letters] of Object.entries(oldPointStructure)) {
+     for (const letter of letters) {
+       newPointStructure[letter.toLowerCase()] = parseInt(points);
+     }
+   }
+   return newPointStructure
 }
-
-newPointStructure = transform(oldPointStructure);
-
-console.log(newPointStructure);
+ 
+ transform(oldPointStructure);
+ 
+ console.log(newPointStructure);
+ console.log(transform);
 
 
 // your job is to finish writing these functions and variables that we've named //
 // don't change the names or your program won't work as expected. //
+
+
+
+
 
 function initialPrompt() {
   console.log("\nWelcome to the Scrabble Scorer! ");
@@ -134,7 +165,8 @@ const scoringAlgorithms = [
   {
     name: "Scrabble",
     description: "The traditional scoring algorithm.",
-    scoreFunction: scrabbleScorer,
+    scoreFunction: transform,
+    //scoreFunction: scrabbleScorer,
   },
 ];
 
@@ -151,18 +183,21 @@ function scorerPrompt() {
 
   if (userChoice === "0") {
    // Simple scoring
-   console.log(`\nAlgorithm name: ${scoringAlgorithms[0].name} -> The word ${word} is worth ${scoringAlgorithms[0].scoreFunction(word)}`
+   console.log(`\nAlgorithm name: ${scoringAlgorithms[0].name} -> The word ${word} is worth ${scoringAlgorithms[0].scoreFunction(word)}
+   `
    );
  } else if (userChoice === "1") {
    // Vowel scoring
    //result += scoringAlgorithms[1].scoreFunction(word);
-   console.log( `\nAlgorithm name: ${scoringAlgorithms[1].name} -> The word ${word} is worth ${scoringAlgorithms[1].scoreFunction(word)}`
+   console.log( `\nAlgorithm name: ${scoringAlgorithms[1].name} -> The word ${word} is worth ${scoringAlgorithms[1].scoreFunction(word)}
+   `
    );
  
   } else if (userChoice === "2") {
     // Scrabble scoring
     //result += scoringAlgorithms[2].scoreFunction(word);
-    console.log( `\nAlgorithm name: ${scoringAlgorithms[2].name} -> The word ${word} is worth ${scoringAlgorithms[2].scoreFunction(word)}`
+    console.log( `\nAlgorithm name: ${scoringAlgorithms[2].name} -> The word ${word} is worth ${scoringAlgorithms[2].scoreFunction(word)}
+    `
     );
   } else {
     console.log("Invalid choice. Please enter 0, 1, OR 2");
